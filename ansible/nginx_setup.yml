@@ -10,7 +10,7 @@
 
     - name: Copy NGINX config
       copy:
-        src: nginx/default.conf
+        src: ../nginx/default.conf
         dest: /etc/nginx/sites-available/default
         owner: root
         group: root
