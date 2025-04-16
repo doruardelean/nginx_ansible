@@ -1,0 +1,9 @@
+- name: Clone linux_tweet_app
+  git:
+    repo: "{{ app_repo }}"
+    dest: "{{ app_dest }}"
+
+- name: Run the app with Docker
+  shell: |
+    docker ps --filter "name={{ app_container_name }}" --format "{{'{{'}}.Names{{'}}'}}" | grep -w {{ app_container_name }} || \
+    (docker build -t {{ app_image_name }} {{ app_dest }} && docker run -d --name {{ app_container_name }} -p {{ app_port }}:80 {{ app_image_name }})

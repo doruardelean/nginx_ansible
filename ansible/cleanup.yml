@@ -1,0 +1,71 @@
+- name: Cleanup and Uninstall Components
+  hosts: web
+  become: yes
+  tasks:
+    - name: Stop NGINX service
+      service:
+        name: nginx
+        state: stopped
+      ignore_errors: true
+
+    - name: Purge nginx and related packages
+      apt:
+        name:
+          - nginx
+          - nginx-common
+          - certbot
+          - python3-certbot-nginx
+        state: absent
+        purge: yes
+        autoremove: yes
+
+    - name: Remove nginx configuration directories
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - /etc/nginx
+        - /var/log/nginx
+        - /var/www/html
+        - /var/lib/nginx
+        - /run/nginx.pid
+
+    - name: Stop and remove all Docker containers and images
+      shell: |
+        docker ps -q | xargs -r docker stop
+        docker ps -aq | xargs -r docker rm
+        docker images -q | xargs -r docker rmi -f
+      ignore_errors: true
+
+    - name: Uninstall Docker
+      apt:
+        name: docker.io
+        state: absent
+
+    - name: Remove Docker directories
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - /var/lib/docker
+        - /etc/docker
+
+    - name: Remove Let's Encrypt certificates
+      file:
+        path: /etc/letsencrypt
+        state: absent
+
+    - name: Remove linux_tweet_app files
+      file:
+        path: /opt/linux_tweet_app
+        state: absent
+
+    - name: Autoremove unused packages
+      apt:
+        name: "*"
+        state: latest
+        autoremove: yes
+
+    - name: Clean up APT cache
+      apt:
+        autoclean: yes

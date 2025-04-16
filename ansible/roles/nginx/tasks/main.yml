@@ -1,0 +1,56 @@
+- name: Install NGINX
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: Install Certbot and NGINX plugin
+  apt:
+    name:
+      - certbot
+      - python3-certbot-nginx
+    state: present
+    update_cache: yes
+
+- name: Copy temporary NGINX config for Certbot
+  template:
+    src: default.conf.j2
+    dest: /etc/nginx/sites-available/default
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Reload NGINX
+
+- name: Ensure Certbot validation directory exists
+  file:
+    path: /var/www/html
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0755'
+
+- name: Test NGINX configuration
+  command: nginx -t
+
+- name: Reload NGINX
+  service:
+    name: nginx
+    state: reloaded
+
+- name: Generate SSL certificate with Certbot
+  shell: |
+    certbot --nginx -d {{ domain_name }} --non-interactive --agree-tos -m {{ email }} --staging
+  args:
+    creates: /etc/letsencrypt/live/{{ domain_name }}/fullchain.pem
+
+- name: Copy final NGINX config with SSL
+  template:
+    src: ssl_default.conf.j2
+    dest: /etc/nginx/sites-available/default
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Reload NGINX
+
+- name: Test NGINX configuration
+  command: nginx -t

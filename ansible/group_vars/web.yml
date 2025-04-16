@@ -1,0 +1,7 @@
+domain_name: potzotech.site
+email: potzotech@gmail.com
+app_repo: https://github.com/dockersamples/linux_tweet_app.git
+app_dest: /opt/linux_tweet_app
+app_image_name: linux_tweet_app
+app_container_name: tweet_app
+app_port: 5000
