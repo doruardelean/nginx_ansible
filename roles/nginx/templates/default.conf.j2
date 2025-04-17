@@ -1,0 +1,12 @@
+server {
+    listen 80;
+    server_name {{ domain_name }};
+
+    location / {
+        return 200 "Temporary HTTP server for Certbot validation";
+    }
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/html;
+    }
+}

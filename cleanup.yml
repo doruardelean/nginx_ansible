@@ -37,19 +37,6 @@
         docker images -q | xargs -r docker rmi -f
       ignore_errors: true
 
-    - name: Uninstall Docker
-      apt:
-        name: docker.io
-        state: absent
-
-    - name: Remove Docker directories
-      file:
-        path: "{{ item }}"
-        state: absent
-      loop:
-        - /var/lib/docker
-        - /etc/docker
-
     - name: Remove Let's Encrypt certificates
       file:
         path: /etc/letsencrypt

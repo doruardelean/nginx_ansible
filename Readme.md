@@ -32,7 +32,7 @@ cd nginx_ansible
 1. **`docker` Role**:
    - Installs Docker.
    - Ensures the Docker service is started and enabled.
-   - Waits for the Docker daemon to be ready.
+   - Reloads systemd configuration.
 
 2. **`nginx` Role**:
    - Installs NGINX.
@@ -56,8 +56,6 @@ cd nginx_ansible
 
 ## Configure SSH Access
 Ensure you can SSH into the EC2 instance:
-ssh -i "/path/to/your-key.pem" ubuntu@<ec2-public-ip>
-
 ssh -i "/home/doru/1Projects/ansible-demo-key.pem" ubuntu@ec2-34-247-159-33.eu-west-1.compute.amazonaws.com
 
 ## Update the Ansible Inventory
@@ -69,9 +67,13 @@ update the inventory file in the project directory to include the EC2 instance:
 ## Playbook Workflow
 1. **Setup Playbook (`setup.yml`)**:
    - Executes the `docker`, `nginx`, and `app` roles in sequence.
-    Run it with this command: 
-        ansible-playbook ansible/setup.yml -i inventory
+    Run all roles with this command:
+        ansible-playbook -i inventory/dev/hosts site.yml
+     To run only a specific role, you can use the --tags option with the ansible-playbook command. For example, if you want to run only the docker role, you can execute:
+        ansible-playbook site.yml -i inventory/dev/hosts --tags "nginx"
+
     Open a browser and navigate to:  https://<your-domain>
+
 2. **Cleanup Playbook (`cleanup.yml`)**:
    - Removes all components installed by the setup playbook.
     Run it with this command: 

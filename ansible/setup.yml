@@ -1,6 +1,0 @@
-- hosts: web
-  become: yes
-  roles:
-    - docker
-    - nginx
-    - app
