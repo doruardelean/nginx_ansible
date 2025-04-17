@@ -1,0 +1,66 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:137.0) Gecko/20100101 Firefox/137.0" version="26.2.13">
+  <diagram name="Architecture Diagram" id="0">
+    <mxGraphModel dx="1362" dy="796" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="11" value="AWS Cloud" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f3f3;strokeColor=#ff9900;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="220" y="40" width="420" height="530" as="geometry" />
+        </mxCell>
+        <mxCell id="4" value="AWS EC2 Instance" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="11" vertex="1">
+          <mxGeometry x="17" y="40" width="386" height="490" as="geometry" />
+        </mxCell>
+        <mxCell id="5" value="NGINX (Reverse Proxy)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="4" vertex="1">
+          <mxGeometry x="38.6" y="32.66666666666665" width="308.8" height="97.99999999999994" as="geometry" />
+        </mxCell>
+        <mxCell id="6" value="Docker (linux_tweet_app)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="4" vertex="1">
+          <mxGeometry x="212.01923076923075" y="336.27450980392143" width="173.97692307692307" height="97.99999999999994" as="geometry" />
+        </mxCell>
+        <mxCell id="7" value="Let&#39;s Encrypt (SSL)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="4" vertex="1">
+          <mxGeometry x="13.28653846153846" y="333.07189542483655" width="158.34807692307692" height="101.20261437908498" as="geometry" />
+        </mxCell>
+        <mxCell id="2RLwEgrYN8InuFPHHneE-15" value="CERTBOT" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#b85450;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.409;entryY=0.997;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="4" source="7" target="5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="203.0962544465369" y="140.14" as="sourcePoint" />
+            <mxPoint x="193" y="147" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="92.00091670901463" y="231.72377358490562" />
+              <mxPoint x="165.00164409768928" y="231.72377358490562" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2RLwEgrYN8InuFPHHneE-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="4" source="5" target="5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="10" value="Proxy to App (Port 5000)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#b85450;" parent="4" edge="1">
+          <mxGeometry x="-0.0232" relative="1" as="geometry">
+            <mxPoint x="203.0000996422842" y="130.66666666666666" as="sourcePoint" />
+            <mxPoint x="308.0011458862683" y="336.2745098039215" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="203.0000996422842" y="201.5471698113207" />
+              <mxPoint x="308.0011458862683" y="201.5471698113207" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2" value="Ansible Control Node" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry y="470" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="8" value="Client (Browser)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="667" y="70" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="9" value="HTTP/HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#d6b656;" parent="1" source="8" target="5" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2RLwEgrYN8InuFPHHneE-13" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;curved=0;strokeColor=#CC0000;" edge="1" parent="1" source="2" target="11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2RLwEgrYN8InuFPHHneE-19" value="Deploy infrastructure / Destroy&lt;br&gt;Port: 22" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2RLwEgrYN8InuFPHHneE-13">
+          <mxGeometry x="0.0491" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
