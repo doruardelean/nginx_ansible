@@ -79,12 +79,10 @@ update the inventory file in the project directory to include the EC2 instance:
     Run it with this command: 
         ansible-playbook ansible/cleanup.yml -i inventory
     optional we can verify the cleanup:
-        docker --version
         nginx -v
         certbot --version
         dpkg -l | grep nginx
 ## Error Handling
-- Docker readiness is ensured using the `wait_for` module.
 - Tasks that may fail harmlessly (e.g., stopping services) use `ignore_errors: true`.
 
 
