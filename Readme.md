@@ -4,7 +4,7 @@
 This project automates the deployment of an NGINX reverse proxy with Let's Encrypt SSL certificates and a Dockerized web application (`linux_tweet_app`) using Ansible.
 
 ## Architecture
-![Architecture Diagram](path/to/diagram.png)
+![Architecture Diagram](diagram.png) 
 
 ## Prerequisites
 

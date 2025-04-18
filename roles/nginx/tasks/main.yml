@@ -32,11 +32,6 @@
 - name: Test NGINX configuration
   command: nginx -t
 
-- name: Reload NGINX
-  service:
-    name: nginx
-    state: reloaded
-
 - name: Generate SSL certificate with Certbot
   shell: |
     certbot --nginx -d {{ domain_name }} --non-interactive --agree-tos -m {{ email }} --staging
