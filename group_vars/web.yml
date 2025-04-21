@@ -1,5 +1,5 @@
-domain_name: potzotech.site
-email: potzotech@gmail.com
+domain_name: domain.site
+email: email@gmail.com
 app_repo: https://github.com/dockersamples/linux_tweet_app.git
 app_dest: /opt/linux_tweet_app
 app_image_name: linux_tweet_app

@@ -1,2 +1,2 @@
 [web]
-potzotech.site ansible_user=ubuntu ansible_ssh_private_key_file=/home/doru/1Projects/ansible-demo-key.pem
+domain.site ansible_user=ubuntu ansible_ssh_private_key_file=/home/doru/1Projects/ansible-demo-key.pem
